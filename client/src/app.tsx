@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AxiosProvider } from "./providers/AxiosProvider";
 import { ToastProvider } from "./providers/ToastProvider";
 import { ChatProvider } from "./providers/ChatProvider";
-import { TeachableProvider } from "./providers/TeachableProvider";
+
 import { HomePage } from "./pages/HomePage";
 import { ChatPage } from "./pages/ChatPage";
-import { TeachablePage } from "./pages/TeachablePage";
+
 
 export const App = () => {
   return (
@@ -20,14 +20,6 @@ export const App = () => {
                 <ChatProvider>
                   <ChatPage />
                 </ChatProvider>
-              }
-            />
-            <Route
-              path="/teachable"
-              element={
-                <TeachableProvider>
-                  <TeachablePage />
-                </TeachableProvider>
               }
             />
             <Route path="*" element={<Navigate to="/" />} />

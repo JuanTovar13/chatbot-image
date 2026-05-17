@@ -63,7 +63,7 @@ export const ToastProvider = ({
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      <div class="fixed bottom-5 right-5 flex flex-col gap-2.5 z-[9999]">
+      <div class="fixed bottom-5 right-5 flex flex-col gap-2.5 z-9999">
         {toasts.map((toast) => {
           const style = toastStyles[toast.type];
           return (

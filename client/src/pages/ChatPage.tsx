@@ -65,36 +65,28 @@ export const ChatPage = () => {
               style={{ borderColor: "var(--color-primary)", borderTopColor: "transparent" }}
             />
           </div>
-        ) : messages.length === 0 ? (
-          <div class="flex flex-col items-center justify-center pt-20 animate-fade-in">
-            <div
-              class="p-4 rounded-2xl mb-4"
-              style={{ background: "var(--color-primary-light)" }}
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.5}
-                class="w-10 h-10"
-                style={{ color: "var(--color-primary)" }}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z"
-                />
-              </svg>
-            </div>
-            <p class="text-lg font-medium" style={{ color: "var(--color-text)" }}>
-              Inicia la conversación
-            </p>
-            <p class="text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>
-              Escribe tu pregunta abajo
-            </p>
-          </div>
         ) : (
-          messages.map((msg) => (
+          <>
+            <div class="max-w-3xl mx-auto flex justify-start animate-fade-in">
+              <div
+                class="max-w-[80%] px-4 py-3 text-sm leading-relaxed rounded-2xl rounded-bl-md"
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-text)",
+                }}
+              >
+                <p class="font-semibold mb-1" style={{ color: "var(--color-primary)" }}>
+                  Bienvenido al gurú de la realidad
+                </p>
+                He experimentado todo en este mundo. Pregúntame cualquier experiencia de la que te gustaría conocer{" "}
+                <span style={{ color: "var(--color-text-muted)" }}>
+                  (ej. ¿cómo se siente una roca lunar?)
+                </span>
+              </div>
+            </div>
+
+            {messages.map((msg) => (
             <div
               key={msg.id}
               class={`max-w-3xl mx-auto flex ${msg.role === "user" ? "justify-end" : "justify-start"} animate-fade-in`}
@@ -121,7 +113,8 @@ export const ChatPage = () => {
                 {msg.content}
               </div>
             </div>
-          ))
+            ))}
+          </>
         )}
 
         {sending && (

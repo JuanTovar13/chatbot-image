@@ -6,28 +6,40 @@
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* Midnight Cartographer palette */
-  --color-bg: #0B0D14;
-  --color-bg-subtle: #0F1119;
-  --color-surface: #151821;
-  --color-surface-hover: #1C2030;
-  --color-surface-raised: #1F2335;
-  --color-text: #E2E4EB;
-  --color-text-secondary: #9499B0;
-  --color-text-muted: #565C78;
-  --color-border: #252A3A;
-  --color-border-subtle: #1E2233;
-  --color-primary: #818CF8;
-  --color-primary-hover: #6366F1;
-  --color-primary-deep: #4F46E5;
-  --color-primary-light: rgba(129, 140, 248, 0.10);
-  --color-primary-glow: rgba(129, 140, 248, 0.25);
-  --color-accent: #22D3EE;
-  --color-accent-light: rgba(34, 211, 238, 0.10);
-  --color-danger: #F43F5E;
-  --color-danger-hover: #E11D48;
-  --color-success: #34D399;
-  --color-shadow: rgba(0, 0, 0, 0.30);
-  --color-shadow-lg: rgba(0, 0, 0, 0.50);
+--color-bg: #05050A;
+  --color-bg-subtle: #090915;
+  --color-surface: #0E0F1D;
+  --color-surface-hover: #15162B;
+  --color-surface-raised: #1C1E3A;
+
+  /* Textos nítidos con un levísimo tono cian para el texto principal */
+  --color-text: #E0F8FF;
+  --color-text-secondary: #8A9BB3;
+  --color-text-muted: #4C5975;
+
+  /* Bordes contrastantes con tonos púrpura/neón apagado */
+  --color-border: #3A1C54;
+  --color-border-subtle: #211236;
+
+  /* Colores Primarios: Neón Magenta/Rosa Clásico Cyberpunk */
+  --color-primary: #FF007F;
+  --color-primary-hover: #FF4DA6;
+  --color-primary-deep: #CC0066;
+  --color-primary-light: rgba(255, 0, 127, 0.15);
+  --color-primary-glow: rgba(255, 0, 127, 0.40);
+
+  /* Colores de Acento: Cian Eléctrico */
+  --color-accent: #00F0FF;
+  --color-accent-light: rgba(0, 240, 255, 0.15);
+
+  /* Estados: Rojos y Verdes puros/radioactivos */
+  --color-danger: #FF2A2A;
+  --color-danger-hover: #FF5555;
+  --color-success: #39FF14;
+
+  /* Sombras más densas para dar profundidad a las luces neón */
+  --color-shadow: rgba(0, 0, 0, 0.60);
+  --color-shadow-lg: rgba(0, 0, 0, 0.80);
 
   font-family: var(--font-sans);
   font-size: 16px;

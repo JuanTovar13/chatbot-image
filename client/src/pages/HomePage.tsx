@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 const cards = [
   {
     title: "Chat AI",
-    description: "Conversa con un modelo de lenguaje potenciado por Groq",
+    description: "Habla con nuestro modelo de lenguaje avanzado para obtener respuestas rápidas y precisas a tus preguntas.",
     path: "/chat",
     icon: (
       <svg
@@ -22,32 +22,6 @@ const cards = [
     ),
     gradient: "from-[var(--color-primary)] to-[var(--color-accent)]",
   },
-  {
-    title: "Teachable Machine",
-    description: "Entrena un modelo para identificar género con tu cámara",
-    path: "/teachable",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        class="w-10 h-10"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="m6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
-        />
-      </svg>
-    ),
-    gradient: "from-[var(--color-accent)] to-[var(--color-success)]",
-  },
 ] as const;
 
 export const HomePage = () => {
@@ -63,14 +37,14 @@ export const HomePage = () => {
               "linear-gradient(135deg, var(--color-primary), var(--color-accent))",
           }}
         >
-          AI Lab
+          Guru AI
         </h1>
         <p class="text-lg" style={{ color: "var(--color-text-secondary)" }}>
-          Elige una herramienta para comenzar
+          El gurú de la realidad: respuestas sorprendentes a tus preguntas
         </p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl">
+      <div class=" max-w-2xl">
         {cards.map((card, i) => (
           <button
             key={card.path}
@@ -79,18 +53,18 @@ export const HomePage = () => {
             style={{ animationDelay: `${(i + 1) * 120}ms`, animationFillMode: "backwards" }}
           >
             <div
-              class={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+              class={`absolute inset-0 bg-linear-to-br ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
             />
 
             <div
-              class="relative rounded-2xl p-8 h-full transition-all duration-300 group-hover:translate-y-[-2px]"
+              class="relative rounded-2xl p-8 h-full transition-all duration-300 group-hover:-translate-y-0.5"
               style={{
                 background: "var(--color-surface)",
                 border: "1px solid var(--color-border)",
               }}
             >
               <div
-                class={`inline-flex p-3 rounded-xl mb-5 bg-gradient-to-br ${card.gradient} opacity-80 group-hover:opacity-100 transition-opacity`}
+                class={`inline-flex p-3 rounded-xl mb-5 bg-linear-to-br ${card.gradient} opacity-80 group-hover:opacity-100 transition-opacity`}
                 style={{ color: "var(--color-bg)" }}
               >
                 {card.icon}
@@ -104,7 +78,7 @@ export const HomePage = () => {
               </p>
 
               <div
-                class="mt-6 flex items-center gap-1.5 text-sm font-medium opacity-0 group-hover:opacity-100 translate-x-[-4px] group-hover:translate-x-0 transition-all duration-300"
+                class="mt-6 flex items-center gap-1.5 text-sm font-medium opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300"
                 style={{ color: "var(--color-primary)" }}
               >
                 Comenzar
