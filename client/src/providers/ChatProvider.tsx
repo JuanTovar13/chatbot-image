@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "preact/hooks";
 import type { ComponentChildren } from "preact";
 import { useAxios } from "./AxiosProvider";
 import { useToast } from "./ToastProvider";
+import { useAuth } from "./AuthProvider";
 import type { ChatMessage, SendMessageResponse } from "../types";
 
 const TEMP_ID_PREFIX = "temp-";
@@ -19,13 +20,16 @@ const ChatContext = createContext<ChatContextType | null>(null);
 export const ChatProvider = ({ children }: { children: ComponentChildren }) => {
   const axios = useAxios();
   const { showToast } = useToast();
+  const { user } = useAuth();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
 
   const fetchMessages = async () => {
     try {
-      const { data } = await axios.get<ChatMessage[]>("/api/chatbot");
+      const { data } = await axios.get<ChatMessage[]>("/api/chatbot", {
+        params: { user_id: user!.uid },
+      });
       setMessages(data);
     } catch (error) {
       showToast((error as Error).message, "error");
@@ -54,6 +58,7 @@ export const ChatProvider = ({ children }: { children: ComponentChildren }) => {
     try {
       const { data } = await axios.post<SendMessageResponse>("/api/chatbot", {
         question,
+        user_id: user!.uid,
       });
       setMessages((prev) =>
         prev

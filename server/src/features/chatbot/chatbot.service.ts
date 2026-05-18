@@ -6,19 +6,19 @@ import { ChatMessage, SendMessageResponse } from "./chatbot.types";
 const createMessage = async (
   content: string,
   role: string,
+  userId: string,
   parentId?: string,
 ): Promise<ChatMessage> => {
   const result = await pool.query<ChatMessage>(
-    `INSERT INTO public.bot_messages (content, role, parent_id) VALUES ($1, $2, $3) RETURNING *`,
-    [content, role, parentId || null],
-  ); // Insertar el mensaje en la base de datos y devolver el mensaje creado
+    `INSERT INTO public.bot_messages (content, role, user_id, parent_id) VALUES ($1, $2, $3, $4) RETURNING *`,
+    [content, role, userId, parentId || null],
+  );
   return result.rows[0];
 };
 
-//aqui se controlan las funciones del chatbot, como enviar un mensaje y obtener los mensajes anteriores
-
 export const sendMessageService = async (
   question: string,
+  userId: string,
 ): Promise<SendMessageResponse> => {
   const completion = await groqClient.chat.completions.create({
     messages: [
@@ -69,7 +69,8 @@ TONO GENERAL:
 - Siempre descriptivo y evocador
 - Usa vocabulario técnico mezclado con lenguaje sensorial
 - Nunca uses frases como "imagina que..." o "sería como si..."
-- Presenta todo como conocimiento establecido`,
+- Presenta todo como conocimiento establecido
+- No escribas más de 3 párrafos por respuesta`,
       },
       { role: "user", content: question },
     ],
@@ -80,20 +81,22 @@ TONO GENERAL:
   const answerContent =
     completion.choices[0]?.message?.content ?? "No response from model";
 
-  const questionMsg = await createMessage(question, "user");
+  const questionMsg = await createMessage(question, "user", userId);
 
   const answerMsg = await createMessage(
     answerContent,
     "assistant",
+    userId,
     questionMsg.id,
   );
 
   return { question: questionMsg, answer: answerMsg };
 };
 
-export const getMessagesService = async (): Promise<ChatMessage[]> => {
+export const getMessagesService = async (userId: string): Promise<ChatMessage[]> => {
   const result = await pool.query<ChatMessage>(
-    `SELECT * FROM public.bot_messages ORDER BY created_at ASC`,
+    `SELECT * FROM public.bot_messages WHERE user_id = $1 ORDER BY created_at ASC`,
+    [userId],
   );
   return result.rows;
 };

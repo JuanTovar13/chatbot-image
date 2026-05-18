@@ -7,23 +7,31 @@ export const sendMessage = async (
   res: Response,
   next: NextFunction,
 ) => {
-  const { question } = req.body; // Validar que la pregunta sea una cadena no vacía
+  const { question, user_id } = req.body;
 
   if (!question || typeof question !== "string" || !question.trim()) {
-    throw Boom.badRequest(
-      "question is required and must be a non-empty string",
-    );
-  } // Eliminar espacios en blanco al inicio y al final de la pregunta
+    throw Boom.badRequest("question is required and must be a non-empty string");
+  }
 
-  const message = await sendMessageService(question.trim()); // Enviar la pregunta al servicio y obtener la respuesta
-  res.status(201).json(message); // Devolver la respuesta al cliente con un código de estado 201 (Created)
+  if (!user_id || typeof user_id !== "string") {
+    throw Boom.badRequest("user_id is required");
+  }
+
+  const message = await sendMessageService(question.trim(), user_id);
+  res.status(201).json(message);
 };
 
 export const getMessages = async (
-  _req: Request,
+  req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const messages = await getMessagesService();
+  const { user_id } = req.query;
+
+  if (!user_id || typeof user_id !== "string") {
+    throw Boom.badRequest("user_id query param is required");
+  }
+
+  const messages = await getMessagesService(user_id);
   res.json(messages);
 }; // Controlador para manejar las rutas relacionadas con el chatbot, como enviar un mensaje y obtener los mensajes anteriores
